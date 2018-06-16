@@ -1,0 +1,14 @@
+<div class="container pt-2">
+    <h4 class="pb-1">Edit Topic</h4>
+    
+
+    <%= form_for @changeset, topic_path(@conn, :update, @topic), fn f -> %>
+        <div class="form-group">
+            <%= text_input f, :title, placeholder: "Title", class: "form-control" %>
+            <%= error_tag f, :title %>
+        </div>
+
+        
+        <%= submit "Save Topic", class: "btn btn-sucess"  %>
+    <% end %>
+</div>

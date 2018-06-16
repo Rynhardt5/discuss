@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hello Discuss!</title>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+
+  <body>
+    <div class="container-fluid">
+     
+
+     <nav class="teal lighten-2">
+      <div class="nav-wrapper">
+      <%= link to: topic_path(@conn, :index), class: "brand-logo center" do %>
+        Discuss
+      <% end %>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li>
+            <%= link to: topic_path(@conn, :index) do %>
+              Topics
+            <% end %>
+          </li>
+          <a class="waves-effect waves-light btn deep-orange lighten-2">Login With Github</a>
+        </ul>
+      </div>
+    </nav>
+
+    <ul class="sidenav center" id="mobile-demo">
+      <li>
+        <%= link to: topic_path(@conn, :index) do %>
+          Topics
+        <% end %>
+      </li>
+      <a class="waves-effect waves-light btn deep-orange lighten-2">Login</a>
+    </ul>
+
+
+      <!-- error handling -->
+
+      <!-- Modal Structure -->
+        <div id="modal1" class="modal blue lighten-5">
+          <div class="modal-content">
+                <a class="modal-close-btn waves-effect waves-teal btn-flat"><i class="material-icons modal-close">close</i></a>  
+            <p> <%= get_flash(@conn, :info) %> </p>
+          </div>
+        </div>
+
+        <div id="modal2" class="modal blue lighten-5">
+          <div class="modal-content">
+                <a class="modal-close-btn waves-effect waves-teal btn-flat"><i class="material-icons modal-close">close</i></a>  
+            <h4>Error</h4>
+            <p> <%= get_flash(@conn, :error) %> </p>
+          </div>
+        </div>
+
+        <!-- error handling -->
+
+      <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+
+    </div> <!-- /container -->
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+      });
+    </script>
+
+    <%= if get_flash(@conn, :info) do %>
+      <script>
+        var elem = document.getElementById("modal1");
+        var instance = M.Modal.init(elem);
+        instance.open();
+      </script>f
+    <% end %>
+
+  </body>
+</html>
