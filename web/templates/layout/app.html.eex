@@ -27,14 +27,10 @@
       <%= link to: topic_path(@conn, :index), class: "brand-logo center" do %>
         Discuss
       <% end %>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <li>
-            <%= link to: topic_path(@conn, :index) do %>
-              Topics
-            <% end %>
-          </li>
-          <a class="waves-effect waves-light btn deep-orange lighten-2">Login With Github</a>
+        
+          
         </ul>
       </div>
     </nav>
@@ -44,8 +40,17 @@
         <%= link to: topic_path(@conn, :index) do %>
           Topics
         <% end %>
+        <%= if @conn.assigns[:user] do %>
+            <li>
+              <%= link "Sign Out", to: auth_path(@conn, :signout), class: "waves-effect waves-light btn deep-orange lighten-2" %>
+            </li>
+          <% else %>
+            <li>
+              <%= link "Sign in With Github", to: auth_path(@conn, :request, "github"), class: "waves-effect waves-light btn deep-orange lighten-2" %>
+              <%= link "Sign in With Facebook", to: auth_path(@conn, :request, "facebook"), class: "waves-effect waves-light btn deep-orange lighten-2" %>
+            </li>
+          <% end %>
       </li>
-      <a class="waves-effect waves-light btn deep-orange lighten-2">Login</a>
     </ul>
 
 
